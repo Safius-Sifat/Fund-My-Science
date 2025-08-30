@@ -124,8 +124,14 @@ export default function OurProjectsSection({ showFilters = true, maxProjects = 6
 
     useEffect(() => {
         const fetchProjects = async () => {
+            const controller = new AbortController()
+            const timeoutId = setTimeout(() => controller.abort(), 10000) // 10 second timeout
+
             try {
                 setLoading(true)
+                setError(null)
+                console.log('Fetching projects from Supabase...')
+
                 const { data, error } = await supabase
                     .from('projects')
                     .select(`
@@ -139,17 +145,28 @@ export default function OurProjectsSection({ showFilters = true, maxProjects = 6
                     .eq('status', 'active')
                     .order('created_at', { ascending: false })
                     .limit(maxProjects)
+                    .abortSignal(controller.signal)
+
+                clearTimeout(timeoutId)
 
                 if (error) {
                     console.error('Error fetching projects:', error)
-                    setError('Failed to load projects')
+                    setError('Failed to load projects. Please try refreshing the page.')
                     return
                 }
 
+                console.log(`Successfully loaded ${data?.length || 0} projects`)
                 setProjects(data || [])
             } catch (err) {
-                console.error('Error:', err)
-                setError('Failed to load projects')
+                clearTimeout(timeoutId)
+                const error = err as Error
+                if (error.name === 'AbortError') {
+                    console.error('Project fetch timeout')
+                    setError('Loading took too long. Please check your connection and try again.')
+                } else {
+                    console.error('Error:', err)
+                    setError('Failed to load projects. Please try refreshing the page.')
+                }
             } finally {
                 setLoading(false)
             }
@@ -245,8 +262,8 @@ export default function OurProjectsSection({ showFilters = true, maxProjects = 6
                                 key={filter}
                                 onClick={() => setSelectedFilter(filter)}
                                 className={`px-6 py-2 rounded-full font-medium transition-colors ${selectedFilter === filter
-                                        ? 'bg-green-600 text-white'
-                                        : 'text-gray-600 hover:text-green-600 border border-gray-300 hover:border-green-600'
+                                    ? 'bg-green-600 text-white'
+                                    : 'text-gray-600 hover:text-green-600 border border-gray-300 hover:border-green-600'
                                     }`}
                             >
                                 {filter}

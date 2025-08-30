@@ -3,7 +3,25 @@ import { createClient } from '@supabase/supabase-js'
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey)
+export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
+    auth: {
+        autoRefreshToken: true,
+        persistSession: true,
+        detectSessionInUrl: true,
+        flowType: 'pkce'
+    },
+    global: {
+        headers: { 'x-my-custom-header': 'fund-my-science' },
+    },
+    db: {
+        schema: 'public',
+    },
+    realtime: {
+        params: {
+            eventsPerSecond: 2,
+        },
+    },
+})
 
 // Type definitions for our database
 export type UserRole = 'researcher' | 'investor' | 'validator' | 'admin'
