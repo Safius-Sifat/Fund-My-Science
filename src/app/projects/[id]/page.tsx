@@ -384,9 +384,9 @@ export default function ProjectDetailPage() {
                             <h3 className="text-lg font-semibold text-gray-900 mb-4">Funding Progress</h3>
 
                             <div className="mb-4">
-                                <div className="flex justify-between text-sm text-gray-600 mb-1">
-                                    <span>Progress</span>
-                                    <span>{fundingProgress.toFixed(1)}%</span>
+                                <div className="flex justify-between text-sm text-gray-800 mb-1">
+                                    <span className="font-medium">Progress</span>
+                                    <span className="font-bold">{fundingProgress.toFixed(1)}%</span>
                                 </div>
                                 <div className="w-full bg-gray-200 rounded-full h-3">
                                     <div
@@ -398,20 +398,20 @@ export default function ProjectDetailPage() {
 
                             <div className="space-y-2 text-sm">
                                 <div className="flex justify-between">
-                                    <span className="text-gray-600">Raised:</span>
-                                    <span className="font-semibold">${project.funds_raised.toLocaleString()}</span>
+                                    <span className="text-gray-700">Raised:</span>
+                                    <span className="font-bold text-gray-900">${project.funds_raised.toLocaleString()}</span>
                                 </div>
                                 <div className="flex justify-between">
-                                    <span className="text-gray-600">Goal:</span>
-                                    <span className="font-semibold">${project.funding_goal.toLocaleString()}</span>
+                                    <span className="text-gray-700">Goal:</span>
+                                    <span className="font-bold text-gray-900">${project.funding_goal.toLocaleString()}</span>
                                 </div>
                                 <div className="flex justify-between">
-                                    <span className="text-gray-600">Remaining:</span>
-                                    <span className="font-semibold">${(project.funding_goal - project.funds_raised).toLocaleString()}</span>
+                                    <span className="text-gray-700">Remaining:</span>
+                                    <span className="font-bold text-gray-900">${(project.funding_goal - project.funds_raised).toLocaleString()}</span>
                                 </div>
                                 <div className="flex justify-between">
-                                    <span className="text-gray-600">Investors:</span>
-                                    <span className="font-semibold">{project.investments.length}</span>
+                                    <span className="text-gray-700">Investors:</span>
+                                    <span className="font-bold text-gray-900">{project.investments.length}</span>
                                 </div>
                             </div>
 

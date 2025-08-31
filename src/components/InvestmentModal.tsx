@@ -41,7 +41,10 @@ export default function InvestmentModal({
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
-        if (!user || !amount) return
+        if (!user || !user.id || !amount) {
+            setError('Please ensure you are logged in and have entered an amount')
+            return
+        }
 
         const investmentAmount = Number(amount)
 
@@ -87,7 +90,7 @@ export default function InvestmentModal({
                         transactionHash: ''
                     }
 
-                    const blockchainResult = await syncInvestmentToBlockchain(investmentData, web3)
+                    const blockchainResult = await syncInvestmentToBlockchain(investmentData, web3, user.id, projectId, investmentAmount)
 
                     if (blockchainResult.success) {
                         console.log('✅ Investment completed on blockchain:', blockchainResult.transactionHash)
@@ -99,7 +102,12 @@ export default function InvestmentModal({
                         return
                     } else {
                         console.warn('⚠️ Blockchain investment failed, falling back to database only:', blockchainResult.error)
-                        // Fall through to database-only method
+                        // Check if it's a database error after successful blockchain transaction
+                        if (blockchainResult.error?.includes('Database')) {
+                            setError(`Blockchain succeeded but database failed: ${blockchainResult.error}`)
+                            return
+                        }
+                        // Fall through to database-only method for blockchain failures
                     }
                 } catch (blockchainError) {
                     console.error('❌ Blockchain investment error:', blockchainError)

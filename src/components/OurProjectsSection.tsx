@@ -78,8 +78,8 @@ function ProjectCard({ project }: ProjectCardProps) {
                 </p>
 
                 <div className="flex justify-between items-center">
-                    <span className="text-sm font-medium">Funding Progress</span>
-                    <span className="text-sm font-bold">{fundingPercentage}%</span>
+                    <span className="text-sm font-bold text-gray-800">Funding Progress</span>
+                    <span className="text-sm font-bold text-gray-900">{fundingPercentage}%</span>
                 </div>
                 <div className="w-full bg-white/20 rounded-full h-2">
                     <div
@@ -90,10 +90,10 @@ function ProjectCard({ project }: ProjectCardProps) {
 
                 <div className="flex justify-between items-center pt-2">
                     <div>
-                        <div className="text-xs opacity-75">
+                        <div className="text-xs text-gray-800 font-medium">
                             ${(project.funds_raised / 1000).toFixed(0)}k raised
                         </div>
-                        <div className="text-xs opacity-75">
+                        <div className="text-xs text-gray-800 font-medium">
                             Goal: ${(project.funding_goal / 1000).toFixed(0)}k
                         </div>
                     </div>

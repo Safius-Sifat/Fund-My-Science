@@ -152,11 +152,11 @@ export async function syncProjectToBlockchain(
 
         // Create project on blockchain
         const resultString = await web3Context.createProjectOnChain(blockchainData)
-        
+
         // Parse the result to get both transaction hash and blockchain project ID
         let transactionHash: string
         let blockchainProjectId: number | null = null
-        
+
         try {
             const result = JSON.parse(resultString)
             transactionHash = result.transactionHash
@@ -200,43 +200,58 @@ export async function syncInvestmentToBlockchain(
     web3Context: {
         investInProjectOnChain: (projectId: number, amount: string) => Promise<string>
         account: string | null
-    }
+    },
+    userId: string,
+    databaseProjectId: number,
+    usdAmount: number
 ): Promise<{ success: boolean; transactionHash?: string; error?: string }> {
     try {
-        console.log('🔄 Syncing investment to blockchain...', investmentData)
+        console.log('🔄 Syncing investment to blockchain...', {
+            investmentData,
+            userId,
+            databaseProjectId,
+            usdAmount,
+            accountAddress: web3Context.account
+        })
 
-        // Invest on blockchain
+        // Invest on blockchain using blockchain project ID
         const transactionHash = await web3Context.investInProjectOnChain(
-            investmentData.projectId,
+            investmentData.projectId, // This is the blockchain project ID
             investmentData.amount
         )
 
-        // Record investment in Supabase
+        // Record investment in Supabase using the database project ID
+        const investmentRecord = {
+            project_id: databaseProjectId, // Use the database project ID
+            investor_id: userId, // Use the authenticated user's UUID
+            amount: usdAmount, // Store USD amount in database
+            transaction_hash: transactionHash,
+            blockchain_status: 'confirmed'
+        }
+
+        console.log('📝 Inserting investment record:', investmentRecord)
+
         const { error: insertError } = await supabase
             .from('investments')
-            .insert({
-                project_id: investmentData.projectId,
-                investor_id: web3Context.account,
-                amount: parseFloat(investmentData.amount),
-                transaction_hash: transactionHash,
-                blockchain_status: 'confirmed'
-            })
+            .insert(investmentRecord)
 
         if (insertError) {
             console.error('Failed to record investment in database:', insertError)
+            throw new Error(`Database insert failed: ${insertError.message}`)
         }
 
         // Update project funds raised
         const { error: updateError } = await supabase.rpc('update_project_funding', {
-            project_id: investmentData.projectId,
-            investment_amount: parseFloat(investmentData.amount)
+            project_id: databaseProjectId, // Use database project ID for funding update
+            investment_amount: usdAmount // Use USD amount for funding update
         })
 
         if (updateError) {
             console.error('Failed to update project funding:', updateError)
+            throw new Error(`Database update failed: ${updateError.message}`)
         }
 
-        console.log('✅ Investment synced to blockchain:', transactionHash)
+        console.log('✅ Investment synced to blockchain and database:', transactionHash)
         return { success: true, transactionHash }
 
     } catch (error: unknown) {
