@@ -7,6 +7,50 @@ A blockchain-powered platform connecting researchers with investors through mile
 ### ✅ Phase 1: Project Setup & Backend Configuration (COMPLETED)
 ### ✅ Phase 2: User Authentication & Profiles (COMPLETED)  
 ### ✅ Phase 3: Core Project Features (COMPLETED)
+### 🚀 Phase 5: Blockchain Integration (IN PROGRESS)
+
+#### What We're Building in Phase 5:
+
+1. **Smart Contract Integration**
+   - Ethereum smart contracts for transparent funding
+   - Milestone-based fund release mechanism
+   - Investor protection through blockchain escrow
+   - Immutable project and funding records
+
+2. **Web3 Wallet Integration**
+   - MetaMask wallet connection
+   - Multi-network support (localhost, Sepolia, mainnet)
+   - Transaction signing and confirmation
+   - Account management and switching
+
+3. **Hybrid Architecture**
+   - Supabase for fast UX and complex queries
+   - Blockchain for transparency and immutability
+   - Automatic synchronization between systems
+   - Offline-first with blockchain sync
+
+4. **Investment & Funding**
+   - ETH-based investments with smart contract escrow
+   - Automatic fund release upon milestone completion
+   - Platform fee collection
+   - Investment tracking and portfolio management
+
+5. **Milestone Verification**
+   - On-chain evidence submission
+   - Validator approval system
+   - Automated fund release
+   - Immutable completion records
+
+#### Current Implementation Status:
+- ✅ Smart contract deployed (FundMyScience.sol)
+- ✅ Web3Context with ethers.js integration
+- ✅ Wallet connection component
+- ✅ Blockchain synchronization utilities
+- ✅ Local development environment setup
+- 🔄 Testing framework and deployment guides
+- ⏳ Production deployment to testnet
+- ⏳ IPFS integration for document storage
+- ⏳ DAO voting mechanism for project approval
 
 #### What We've Built in Phase 3:
 

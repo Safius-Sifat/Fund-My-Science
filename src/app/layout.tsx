@@ -1,5 +1,6 @@
 import AuthDebugger from "@/components/AuthDebugger";
 import { AuthProvider } from "@/contexts/AuthContext";
+import { Web3Provider } from "@/contexts/Web3Context";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
@@ -52,8 +53,10 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <AuthProvider>
-          {children}
-          <AuthDebugger />
+          <Web3Provider>
+            {children}
+            <AuthDebugger />
+          </Web3Provider>
         </AuthProvider>
       </body>
     </html>

@@ -90,6 +90,16 @@ export default function ProjectsPage() {
         }
     }
 
+    const getBlockchainStatusColor = (status: string) => {
+        switch (status) {
+            case 'synced': return 'bg-emerald-100 text-emerald-800'
+            case 'pending': return 'bg-blue-100 text-blue-800'
+            case 'failed': return 'bg-red-100 text-red-800'
+            case 'no_wallet': return 'bg-orange-100 text-orange-800'
+            default: return 'bg-gray-100 text-gray-800'
+        }
+    }
+
     if (loading || isLoading) {
         return (
             <div className="min-h-screen bg-gray-50">
@@ -213,7 +223,12 @@ export default function ProjectsPage() {
                                             </span>
                                             {project.proposals?.[0] && (
                                                 <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getDAOStatusColor(project.proposals[0].dao_status)}`}>
-                                                    {project.proposals[0].dao_status.replace('_', ' ')}
+                                                    DAO: {project.proposals[0].dao_status.replace('_', ' ')}
+                                                </span>
+                                            )}
+                                            {project.blockchain_status && (
+                                                <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getBlockchainStatusColor(project.blockchain_status)}`}>
+                                                    ⛓️ {project.blockchain_status === 'no_wallet' ? 'No Wallet' : project.blockchain_status}
                                                 </span>
                                             )}
                                         </div>
@@ -226,19 +241,19 @@ export default function ProjectsPage() {
                                     <div className="space-y-2 mb-4">
                                         <div className="flex justify-between text-sm">
                                             <span className="text-gray-500">Researcher:</span>
-                                            <span className="font-medium">{project.profiles?.full_name || 'Unknown'}</span>
+                                            <span className="font-medium text-gray-900">{project.profiles?.full_name || 'Unknown'}</span>
                                         </div>
                                         <div className="flex justify-between text-sm">
                                             <span className="text-gray-500">University:</span>
-                                            <span className="font-medium">{project.universities?.name || 'Unknown'}</span>
+                                            <span className="font-medium text-gray-900">{project.universities?.name || 'Unknown'}</span>
                                         </div>
                                         <div className="flex justify-between text-sm">
                                             <span className="text-gray-500">Goal:</span>
-                                            <span className="font-medium">${project.funding_goal.toLocaleString()}</span>
+                                            <span className="font-medium text-gray-900">${project.funding_goal.toLocaleString()}</span>
                                         </div>
                                         <div className="flex justify-between text-sm">
                                             <span className="text-gray-500">Raised:</span>
-                                            <span className="font-medium">${project.funds_raised.toLocaleString()}</span>
+                                            <span className="font-medium text-gray-900">${project.funds_raised.toLocaleString()}</span>
                                         </div>
                                     </div>
 

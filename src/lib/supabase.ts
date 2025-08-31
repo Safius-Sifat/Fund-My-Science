@@ -58,6 +58,8 @@ export interface Project {
     status: ProjectStatus
     funding_goal: number
     funds_raised: number
+    blockchain_tx_hash: string | null
+    blockchain_status: string | null
     created_at: string
     updated_at: string
 }

@@ -3,6 +3,7 @@
 import { useAuthWithTimeout } from '@/hooks/useAuth'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import WalletConnection from './WalletConnection'
 
 export default function Navigation() {
     // Use timeout hook to prevent infinite loading
@@ -40,18 +41,27 @@ export default function Navigation() {
 
                         {user && (
                             <div className="hidden md:flex space-x-4">
-                                <Link
+                                {/* <Link
                                     href="/dashboard"
                                     className="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"
                                 >
                                     Dashboard
-                                </Link>
+                                </Link> */}
                                 <Link
                                     href="/projects"
                                     className="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"
                                 >
                                     Browse Projects
                                 </Link>
+
+                                {profile?.user_role === 'validator' && (
+                                    <Link
+                                        href="/dao"
+                                        className="text-purple-600 hover:text-purple-900 px-3 py-2 rounded-md text-sm font-semibold"
+                                    >
+                                        DAO Governance
+                                    </Link>
+                                )}
 
                                 {profile?.user_role === 'researcher' && (
                                     <>
@@ -68,9 +78,7 @@ export default function Navigation() {
                                             Create Project
                                         </Link>
                                     </>
-                                )}
-
-                                {profile?.user_role === 'investor' && (
+                                )}                                {profile?.user_role === 'investor' && (
                                     <Link
                                         href="/projects/my"
                                         className="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"
@@ -85,6 +93,9 @@ export default function Navigation() {
                     <div className="flex items-center space-x-4">
                         {user ? (
                             <div className="flex items-center space-x-4">
+                                {/* Web3 Wallet Connection */}
+                                <WalletConnection />
+
                                 <Link
                                     href="/profile"
                                     className="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"

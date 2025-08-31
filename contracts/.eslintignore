@@ -1,0 +1,20 @@
+# Ignore all JavaScript files in contracts folder from main ESLint config
+*.js
+*.ts
+*.cjs
+
+# But allow specific patterns if needed
+!hardhat.config.js
+!hardhat.config.cjs
+!scripts/*.js
+!test/*.js
+
+# Ignore generated files
+artifacts/
+cache/
+coverage/
+node_modules/
+typechain-types/
+
+# Ignore deployment files
+deployments/

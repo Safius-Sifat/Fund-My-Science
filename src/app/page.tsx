@@ -53,11 +53,11 @@ export default function Home() {
       <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 text-center">
-            What <em className="italic">Our Clients</em> Say
+            What <em className="italic">Our Researchers</em> Say
           </h2>
           <p className="text-gray-600 mb-12 text-center max-w-2xl mx-auto">
-            Discover what our thousands of researchers have to say about working with FundMyScience to fund
-            their scientific research.
+            Discover what our thousands of researchers have to say about using FundMyScience to fund
+            their groundbreaking scientific research.
           </p>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -68,39 +68,91 @@ export default function Home() {
                   <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h4v10h-10z" />
                 </svg>
                 <p className="text-gray-700 text-lg leading-relaxed mb-6">
-                  Innovate Studio transformed our brand from the ground up. Their deep understanding of our vision
-                  and their creative approach to design were simply unmatched. The new brand identity and website
-                  have not only resonated with our audience but have also driven measurable results. We
-                  couldnt be happier with the results.
+                  FundMyScience revolutionized how I approach research funding. The platforms DAO governance
+                  and blockchain transparency gave my renewable energy project the credibility it needed.
+                  Within 3 months, I secured $250K in funding from global investors who believe in
+                  sustainable technology.
                 </p>
                 <div className="flex items-center">
-                  <div className="w-12 h-12 bg-gray-200 rounded-full mr-4"></div>
+                  <img
+                    src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face"
+                    alt="Dr. Alex Chen"
+                    className="w-12 h-12 rounded-full mr-4 object-cover"
+                  />
                   <div>
-                    <h4 className="font-semibold text-gray-900">Manson Benz</h4>
-                    <p className="text-gray-600 text-sm">Marketing Director at Pipeline</p>
+                    <h4 className="font-semibold text-gray-900">Dr. Alex Chen</h4>
+                    <p className="text-gray-600 text-sm">Renewable Energy Research, MIT</p>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Image placeholder */}
+            {/* Researcher Image */}
             <div className="relative">
-              <div className="w-full h-96 bg-gray-200 rounded-2xl"></div>
+              <img
+                src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=600&h=400&fit=crop"
+                alt="Scientist working in laboratory"
+                className="w-full h-96 object-cover rounded-2xl shadow-lg"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-2xl"></div>
             </div>
           </div>
-        </div>
-      </section>
 
-      {/* Trusted By Section */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl font-bold text-gray-900 mb-12">
-            <em className="italic">Trusted By</em>
-          </h2>
-          <div className="grid grid-cols-2 md:grid-cols-6 gap-8 items-center opacity-60">
-            {[1, 2, 3, 4, 5, 6].map((i) => (
-              <div key={i} className="w-16 h-16 bg-gray-300 rounded-full mx-auto"></div>
-            ))}
+          {/* Additional Testimonials Row */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-16">
+            <div className="bg-white rounded-xl p-6 shadow-md">
+              <div className="flex items-center mb-4">
+                <img
+                  src="https://images.unsplash.com/photo-1494790108755-2616b332e234?w=150&h=150&fit=crop&crop=face"
+                  alt="Dr. Sarah Martinez"
+                  className="w-10 h-10 rounded-full mr-3 object-cover"
+                />
+                <div>
+                  <h5 className="font-semibold text-sm">Dr. Sarah Martinez</h5>
+                  <p className="text-xs text-gray-600">Climate Science, Stanford</p>
+                </div>
+              </div>
+              <p className="text-sm text-gray-700 leading-relaxed">
+                &ldquo;The milestone-based funding model helped me demonstrate progress to investors
+                throughout my 18-month climate modeling project.&rdquo;
+              </p>
+            </div>
+
+            <div className="bg-white rounded-xl p-6 shadow-md">
+              <div className="flex items-center mb-4">
+                <img
+                  src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face"
+                  alt="Prof. Michael Johnson"
+                  className="w-10 h-10 rounded-full mr-3 object-cover"
+                />
+                <div>
+                  <h5 className="font-semibold text-sm">Prof. Michael Johnson</h5>
+                  <p className="text-xs text-gray-600">Biotechnology, Harvard</p>
+                </div>
+              </div>
+              <p className="text-sm text-gray-700 leading-relaxed">
+                &ldquo;Secured $400K for my gene therapy research. The AI evaluation system
+                helped investors understand the market potential of our breakthrough.&rdquo;
+              </p>
+            </div>
+
+            <div className="bg-white rounded-xl p-6 shadow-md">
+              <div className="flex items-center mb-4">
+                <img
+                  src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&h=150&fit=crop&crop=face"
+                  alt="Dr. Emily Wong"
+                  className="w-10 h-10 rounded-full mr-3 object-cover"
+                />
+                <div>
+                  <h5 className="font-semibold text-sm">Dr. Emily Wong</h5>
+                  <p className="text-xs text-gray-600">AI Research, Berkeley</p>
+                </div>
+              </div>
+              <p className="text-sm text-gray-700 leading-relaxed">
+                &ldquo;The global investor network gave my quantum computing project
+                the international funding it needed to compete with major labs.&rdquo;
+              </p>
+            </div>
           </div>
         </div>
       </section>
@@ -117,41 +169,93 @@ export default function Home() {
           </p>
 
           {/* Institution Logos */}
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 items-center">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 items-center mb-16">
             {[
-              { name: "MIT", logo: "MIT" },
-              { name: "Stanford", logo: "Stanford" },
-              { name: "Harvard", logo: "Harvard" },
-              { name: "Oxford", logo: "Oxford" },
-              { name: "Berkeley", logo: "UC Berkeley" },
-              { name: "Cambridge", logo: "Cambridge" }
+              {
+                name: "MIT",
+                alt: "Massachusetts Institute of Technology",
+                fallback: "MIT"
+              },
+              {
+                name: "Stanford",
+                alt: "Stanford University",
+                fallback: "Stanford"
+              },
+              {
+                name: "Harvard",
+                alt: "Harvard University",
+                fallback: "Harvard"
+              },
+              {
+                name: "Oxford",
+                alt: "University of Oxford",
+                fallback: "Oxford"
+              },
+              {
+                name: "UC Berkeley",
+                alt: "UC Berkeley",
+                fallback: "Berkeley"
+              },
+              {
+                name: "Cambridge",
+                alt: "University of Cambridge",
+                fallback: "Cambridge"
+              }
             ].map((institution, i) => (
-              <div key={i} className="flex flex-col items-center">
-                <div className="w-20 h-20 bg-gray-100 rounded-lg flex items-center justify-center mb-2">
-                  <span className="text-xs font-semibold text-gray-600">{institution.logo}</span>
+              <div key={i} className="flex flex-col items-center group">
+                <div className="w-16 h-16 bg-white rounded-lg shadow-sm border border-gray-100 flex items-center justify-center mb-3 group-hover:shadow-md transition-shadow">
+                  <div className="w-12 h-12 flex items-center justify-center bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg">
+                    <span className="text-blue-600 font-bold text-xs text-center leading-tight">
+                      {institution.fallback}
+                    </span>
+                  </div>
                 </div>
-                <span className="text-xs text-gray-500">{institution.name}</span>
+                <span className="text-xs text-gray-600 font-medium">{institution.name}</span>
               </div>
             ))}
           </div>
 
+          {/* Research Partners */}
+          <div className="bg-gray-50 rounded-2xl p-8 mb-16">
+            <h3 className="text-2xl font-bold text-gray-900 mb-6">Research Partners</h3>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+              {[
+                { name: "NSF", fullName: "National Science Foundation" },
+                { name: "NIH", fullName: "National Institutes of Health" },
+                { name: "NASA", fullName: "National Aeronautics and Space Administration" },
+                { name: "DOE", fullName: "Department of Energy" }
+              ].map((partner, i) => (
+                <div key={i} className="text-center">
+                  <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mx-auto mb-2">
+                    <span className="text-blue-600 font-bold text-sm">{partner.name}</span>
+                  </div>
+                  <p className="text-xs text-gray-600">{partner.fullName}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
           {/* Stats */}
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mt-16">
-            <div>
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-6">
               <div className="text-4xl font-bold text-green-600 mb-2">500+</div>
-              <div className="text-gray-600">Active Projects</div>
+              <div className="text-gray-700 font-medium">Active Projects</div>
+              <div className="text-xs text-gray-500 mt-1">Across 50+ countries</div>
             </div>
-            <div>
-              <div className="text-4xl font-bold text-green-600 mb-2">$50M+</div>
-              <div className="text-gray-600">Funds Raised</div>
+            <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-6">
+              <div className="text-4xl font-bold text-blue-600 mb-2">$50M+</div>
+              <div className="text-gray-700 font-medium">Funds Raised</div>
+              <div className="text-xs text-gray-500 mt-1">In total funding</div>
             </div>
-            <div>
-              <div className="text-4xl font-bold text-green-600 mb-2">10K+</div>
-              <div className="text-gray-600">Researchers</div>
+            <div className="bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl p-6">
+              <div className="text-4xl font-bold text-purple-600 mb-2">10K+</div>
+              <div className="text-gray-700 font-medium">Researchers</div>
+              <div className="text-xs text-gray-500 mt-1">Global community</div>
             </div>
-            <div>
-              <div className="text-4xl font-bold text-green-600 mb-2">95%</div>
-              <div className="text-gray-600">Success Rate</div>
+            <div className="bg-gradient-to-br from-orange-50 to-orange-100 rounded-xl p-6">
+              <div className="text-4xl font-bold text-orange-600 mb-2">95%</div>
+              <div className="text-gray-700 font-medium">Success Rate</div>
+              <div className="text-xs text-gray-500 mt-1">Project completion</div>
             </div>
           </div>
         </div>
@@ -163,54 +267,102 @@ export default function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Contact Image */}
             <div className="relative">
-              <div className="w-full h-96 bg-gradient-to-br from-green-400 to-green-600 rounded-2xl"></div>
+              <img
+                src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=800&h=600&fit=crop&auto=format"
+                alt="Scientists and researchers working together on breakthrough innovations"
+                className="w-full h-96 object-cover rounded-2xl shadow-lg"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-green-600/30 to-transparent rounded-2xl"></div>
+              <div className="absolute bottom-6 left-6 text-white">
+                <h3 className="text-xl font-bold mb-2">Fund the Future of Science</h3>
+                <p className="text-sm opacity-90">Connect with researchers changing the world</p>
+              </div>
             </div>
 
             {/* Contact Form */}
             <div>
-              <h2 className="text-4xl font-bold text-gray-900 mb-6">Contact Us</h2>
+              <h2 className="text-4xl font-bold text-gray-900 mb-3">Contact Us</h2>
+              <p className="text-gray-600 mb-8">
+                Ready to fund groundbreaking research? Get in touch with our team and let&apos;s discuss
+                how we can support your scientific innovation.
+              </p>
 
               <form className="space-y-6">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
-                  <input
-                    type="text"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                    placeholder="Enter your full name"
-                  />
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
+                    <input
+                      type="text"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
+                      placeholder="Enter your full name"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+                    <input
+                      type="email"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
+                      placeholder="your.email@university.edu"
+                    />
+                  </div>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">E-mail</label>
-                  <input
-                    type="email"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                    placeholder="Enter your email"
-                  />
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Research Field</label>
+                  <select className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all">
+                    <option value="">Select your research field</option>
+                    <option value="renewable-energy">Renewable Energy</option>
+                    <option value="biotechnology">Biotechnology</option>
+                    <option value="artificial-intelligence">Artificial Intelligence</option>
+                    <option value="climate-science">Climate Science</option>
+                    <option value="space-technology">Space Technology</option>
+                    <option value="medical-research">Medical Research</option>
+                    <option value="other">Other</option>
+                  </select>
                 </div>
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">Message</label>
                   <textarea
                     rows={4}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                    placeholder="Enter your message"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
+                    placeholder="Tell us about your research project and funding needs..."
                   />
                 </div>
 
-                <button className="w-full bg-black hover:bg-gray-800 text-white px-6 py-3 rounded-lg font-medium">
-                  Contact Us
+                <button className="w-full bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition-colors flex items-center justify-center">
+                  <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 001.79 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                  Send Message
                 </button>
               </form>
 
-              <div className="mt-8 space-y-4">
-                <div>
-                  <h3 className="font-semibold text-gray-900">Contact</h3>
-                  <p className="text-gray-600">hi@fmscience.com</p>
+              <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="bg-white rounded-lg p-6 shadow-sm border">
+                  <div className="flex items-center mb-3">
+                    <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center mr-3">
+                      <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 001.79 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                      </svg>
+                    </div>
+                    <h3 className="font-semibold text-gray-900">Email</h3>
+                  </div>
+                  <p className="text-gray-600">support@fundmyscience.com</p>
+                  <p className="text-gray-600">partnerships@fundmyscience.com</p>
                 </div>
-                <div>
-                  <h3 className="font-semibold text-gray-900">Based in</h3>
-                  <p className="text-gray-600">Los Angeles,<br />California</p>
+                <div className="bg-white rounded-lg p-6 shadow-sm border">
+                  <div className="flex items-center mb-3">
+                    <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mr-3">
+                      <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                      </svg>
+                    </div>
+                    <h3 className="font-semibold text-gray-900">Headquarters</h3>
+                  </div>
+                  <p className="text-gray-600">Palo Alto, California</p>
+                  <p className="text-gray-600">San Francisco Bay Area</p>
                 </div>
               </div>
 

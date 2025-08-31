@@ -214,25 +214,20 @@ export default function CreateProjectPage() {
 
             console.log('✅ Project created successfully:', projectData)
 
-            // Create proposal
-            console.log('📋 Creating proposal in database...')
-            const proposalInsertData = {
-                project_id: projectData.id,
-                proposal_document_url: proposalDocumentUrl,
-                dao_status: 'pending_vote'
+            // Note: Proposal will be created when project is submitted for review
+            // Store proposal document URL in project for later use
+            if (proposalDocumentUrl) {
+                const { error: updateError } = await supabase
+                    .from('projects')
+                    .update({
+                        proposal_document_url: proposalDocumentUrl
+                    })
+                    .eq('id', projectData.id)
+
+                if (updateError) {
+                    console.warn('⚠️ Failed to update project with proposal document URL:', updateError)
+                }
             }
-            console.log('📊 Proposal insert data:', proposalInsertData)
-
-            const { error: proposalError } = await supabase
-                .from('proposals')
-                .insert(proposalInsertData)
-
-            if (proposalError) {
-                console.error('❌ Proposal creation failed:', proposalError)
-                throw new Error(`Failed to create proposal: ${proposalError.message}`)
-            }
-
-            console.log('✅ Proposal created successfully')
 
             // Create milestones
             console.log('🎯 Creating milestones in database...')
@@ -256,11 +251,14 @@ export default function CreateProjectPage() {
             }
 
             console.log('✅ Milestones created successfully')
-            console.log('🎉 Project creation completed! Redirecting to project page...')
 
-            // Redirect to project page
-            router.push(`/projects/${projectData.id}`)
+            // Note: Blockchain sync happens later when project is approved by DAO
+            console.log('� Project saved as draft - will sync to blockchain after DAO approval')
 
+            console.log('🎉 Project creation completed! Redirecting to My Projects page...')
+
+            // Redirect to my projects page so user can submit for review
+            router.push(`/projects/my`)
         } catch (err) {
             console.error('💥 Project creation failed with error:', err)
             const errorMessage = err instanceof Error ? err.message : 'An unexpected error occurred'

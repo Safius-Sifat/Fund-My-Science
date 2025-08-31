@@ -157,6 +157,8 @@ export default function OurProjectsSection({ showFilters = true, maxProjects = 6
 
                 console.log(`Successfully loaded ${data?.length || 0} projects`)
                 setProjects(data || [])
+                console.log(projects)
+                console.log(data)
             } catch (err) {
                 clearTimeout(timeoutId)
                 const error = err as Error

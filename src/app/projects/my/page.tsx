@@ -29,6 +29,7 @@ export default function MyProjectsPage() {
     const router = useRouter()
     const [projects, setProjects] = useState<ProjectWithProposal[]>([])
     const [isLoading, setIsLoading] = useState(true)
+    const [submittingReview, setSubmittingReview] = useState<{ [key: number]: boolean }>({})
 
     const fetchMyProjects = useCallback(async () => {
         try {
@@ -63,6 +64,73 @@ export default function MyProjectsPage() {
             setIsLoading(false)
         }
     }, [user?.id])
+
+    const submitForReview = async (projectId: number) => {
+        setSubmittingReview(prev => ({ ...prev, [projectId]: true }))
+
+        try {
+            // Get project details including proposal document URL
+            const { data: projectData, error: fetchError } = await supabase
+                .from('projects')
+                .select('proposal_document_url')
+                .eq('id', projectId)
+                .single()
+
+            if (fetchError) throw fetchError
+
+            // Update project status to pending_approval
+            const { error: projectError } = await supabase
+                .from('projects')
+                .update({
+                    status: 'pending_approval',
+                    updated_at: new Date().toISOString()
+                })
+                .eq('id', projectId)
+
+            if (projectError) throw projectError
+
+            // Ensure proposal exists and update its status
+            const { data: existingProposal } = await supabase
+                .from('proposals')
+                .select('id')
+                .eq('project_id', projectId)
+                .single()
+
+            if (!existingProposal) {
+                // Create proposal if it doesn't exist
+                const { error: proposalError } = await supabase
+                    .from('proposals')
+                    .insert({
+                        project_id: projectId,
+                        proposal_document_url: projectData.proposal_document_url,
+                        dao_status: 'pending_vote'
+                    })
+
+                if (proposalError) throw proposalError
+            } else {
+                // Update existing proposal
+                const { error: proposalError } = await supabase
+                    .from('proposals')
+                    .update({
+                        dao_status: 'pending_vote',
+                        proposal_document_url: projectData.proposal_document_url
+                    })
+                    .eq('project_id', projectId)
+
+                if (proposalError) throw proposalError
+            }
+
+            // Refresh projects list
+            await fetchMyProjects()
+
+            alert('Project submitted for DAO review successfully!')
+        } catch (error) {
+            console.error('Error submitting for review:', error)
+            alert('Failed to submit project for review. Please try again.')
+        } finally {
+            setSubmittingReview(prev => ({ ...prev, [projectId]: false }))
+        }
+    }
 
     useEffect(() => {
         if (!loading && !user) {
@@ -188,7 +256,7 @@ export default function MyProjectsPage() {
                                     <div className="space-y-3">
                                         <div className="flex justify-between text-sm">
                                             <span className="text-gray-500">Funding Goal:</span>
-                                            <span className="font-medium">${project.funding_goal.toLocaleString()}</span>
+                                            <span className="font-medium text-gray-900">${project.funding_goal.toLocaleString()}</span>
                                         </div>
 
                                         <div className="flex justify-between text-sm">
@@ -241,12 +309,26 @@ export default function MyProjectsPage() {
                                                 View Details
                                             </Link>
                                             {project.status === 'draft' && (
-                                                <Link
-                                                    href={`/projects/${project.id}/edit`}
-                                                    className="flex-1 text-center border border-gray-300 hover:border-gray-400 text-gray-700 px-4 py-2 rounded-md text-sm font-medium"
-                                                >
-                                                    Edit
-                                                </Link>
+                                                <>
+                                                    <Link
+                                                        href={`/projects/${project.id}/edit`}
+                                                        className="flex-1 text-center border border-gray-300 hover:border-gray-400 text-gray-700 px-4 py-2 rounded-md text-sm font-medium"
+                                                    >
+                                                        Edit
+                                                    </Link>
+                                                    <button
+                                                        onClick={() => submitForReview(project.id)}
+                                                        disabled={submittingReview[project.id]}
+                                                        className="flex-1 bg-green-600 hover:bg-green-700 disabled:bg-green-400 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors"
+                                                    >
+                                                        {submittingReview[project.id] ? 'Submitting...' : 'Submit for Review'}
+                                                    </button>
+                                                </>
+                                            )}
+                                            {project.status === 'pending_approval' && (
+                                                <div className="flex-1 text-center text-yellow-700 px-4 py-2 rounded-md text-sm font-medium bg-yellow-50 border border-yellow-200">
+                                                    Under DAO Review
+                                                </div>
                                             )}
                                         </div>
                                     </div>

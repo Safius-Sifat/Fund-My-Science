@@ -20,6 +20,10 @@ interface ProjectDetails {
     funds_raised: number
     created_at: string
     updated_at: string
+    researcher_id: string
+    blockchain_project_id: number | null
+    blockchain_status: string | null
+    blockchain_tx_hash: string | null
     profiles: {
         full_name: string | null
         website: string | null
@@ -239,19 +243,19 @@ export default function ProjectDetailPage() {
                                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
                                     <div>
                                         <p className="text-sm text-gray-500">Researcher</p>
-                                        <p className="font-medium">{project.profiles?.full_name || 'Unknown'}</p>
+                                        <p className="font-medium text-gray-900">{project.profiles?.full_name || 'Unknown'}</p>
                                     </div>
                                     <div>
                                         <p className="text-sm text-gray-500">University</p>
-                                        <p className="font-medium">{project.universities?.name || 'Unknown'}</p>
+                                        <p className="font-medium text-gray-900">{project.universities?.name || 'Unknown'}</p>
                                     </div>
                                     <div>
                                         <p className="text-sm text-gray-500">Goal</p>
-                                        <p className="font-medium">${project.funding_goal.toLocaleString()}</p>
+                                        <p className="font-medium text-gray-900">${project.funding_goal.toLocaleString()}</p>
                                     </div>
                                     <div>
                                         <p className="text-sm text-gray-500">Raised</p>
-                                        <p className="font-medium">${project.funds_raised.toLocaleString()}</p>
+                                        <p className="font-medium text-gray-900">${project.funds_raised.toLocaleString()}</p>
                                     </div>
                                 </div>
 
@@ -411,13 +415,19 @@ export default function ProjectDetailPage() {
                                 </div>
                             </div>
 
-                            {user && profile?.user_role === 'investor' && project.status === 'active' && (
+                            {user && profile?.user_role === 'investor' && project.status === 'active' && user.id !== project.researcher_id && (
                                 <button
                                     onClick={() => setShowInvestModal(true)}
                                     className="w-full mt-4 bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md font-medium"
                                 >
                                     Invest in Project
                                 </button>
+                            )}
+
+                            {user && user.id === project.researcher_id && (
+                                <div className="w-full mt-4 bg-gray-100 text-gray-600 py-2 px-4 rounded-md font-medium text-center">
+                                    You cannot invest in your own project
+                                </div>
                             )}
                         </div>
 
@@ -472,9 +482,11 @@ export default function ProjectDetailPage() {
                 isOpen={showInvestModal}
                 onClose={() => setShowInvestModal(false)}
                 projectId={project.id}
+                blockchainProjectId={project.blockchain_project_id}
                 projectTitle={project.title}
                 fundingGoal={project.funding_goal}
                 fundsRaised={project.funds_raised}
+                researcherId={project.researcher_id}
                 onInvestmentSuccess={handleInvestmentSuccess}
             />
         </div>
