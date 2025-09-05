@@ -169,213 +169,133 @@ export default function Home() {
           </p>
 
           {/* Institution Logos */}
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 items-center mb-16">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 items-center">
             {[
               {
                 name: "MIT",
                 alt: "Massachusetts Institute of Technology",
-                fallback: "MIT"
+                logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/MIT_logo.svg/200px-MIT_logo.svg.png"
               },
               {
                 name: "Stanford",
                 alt: "Stanford University",
-                fallback: "Stanford"
+                logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Seal_of_Leland_Stanford_Junior_University.svg/200px-Seal_of_Leland_Stanford_Junior_University.svg.png"
               },
               {
                 name: "Harvard",
                 alt: "Harvard University",
-                fallback: "Harvard"
+                logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Harvard_University_coat_of_arms.svg/200px-Harvard_University_coat_of_arms.svg.png"
               },
               {
                 name: "Oxford",
                 alt: "University of Oxford",
-                fallback: "Oxford"
+                logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Oxford-University-Circlet.svg/200px-Oxford-University-Circlet.svg.png"
               },
               {
                 name: "UC Berkeley",
                 alt: "UC Berkeley",
-                fallback: "Berkeley"
+                logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Seal_of_University_of_California%2C_Berkeley.svg/200px-Seal_of_University_of_California%2C_Berkeley.svg.png"
               },
               {
                 name: "Cambridge",
                 alt: "University of Cambridge",
-                fallback: "Cambridge"
+                logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/University_of_Cambridge_Logo.svg/200px-University_of_Cambridge_Logo.svg.png"
               }
             ].map((institution, i) => (
               <div key={i} className="flex flex-col items-center group">
-                <div className="w-16 h-16 bg-white rounded-lg shadow-sm border border-gray-100 flex items-center justify-center mb-3 group-hover:shadow-md transition-shadow">
-                  <div className="w-12 h-12 flex items-center justify-center bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg">
-                    <span className="text-blue-600 font-bold text-xs text-center leading-tight">
-                      {institution.fallback}
-                    </span>
-                  </div>
+                <div className="w-16 h-16 bg-white rounded-lg shadow-sm border border-gray-100 flex items-center justify-center mb-3 group-hover:shadow-md transition-shadow p-2">
+                  <img
+                    src={institution.logo}
+                    alt={institution.alt}
+                    className="w-full h-full object-contain filter grayscale group-hover:grayscale-0 transition-all duration-300"
+                  />
                 </div>
-                <span className="text-xs text-gray-600 font-medium">{institution.name}</span>
+                <span className="text-xs text-gray-600 font-medium text-center">{institution.name}</span>
               </div>
             ))}
-          </div>
-
-          {/* Research Partners */}
-          <div className="bg-gray-50 rounded-2xl p-8 mb-16">
-            <h3 className="text-2xl font-bold text-gray-900 mb-6">Research Partners</h3>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-              {[
-                { name: "NSF", fullName: "National Science Foundation" },
-                { name: "NIH", fullName: "National Institutes of Health" },
-                { name: "NASA", fullName: "National Aeronautics and Space Administration" },
-                { name: "DOE", fullName: "Department of Energy" }
-              ].map((partner, i) => (
-                <div key={i} className="text-center">
-                  <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mx-auto mb-2">
-                    <span className="text-blue-600 font-bold text-sm">{partner.name}</span>
-                  </div>
-                  <p className="text-xs text-gray-600">{partner.fullName}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Stats */}
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-6">
-              <div className="text-4xl font-bold text-green-600 mb-2">500+</div>
-              <div className="text-gray-700 font-medium">Active Projects</div>
-              <div className="text-xs text-gray-500 mt-1">Across 50+ countries</div>
-            </div>
-            <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-6">
-              <div className="text-4xl font-bold text-blue-600 mb-2">$50M+</div>
-              <div className="text-gray-700 font-medium">Funds Raised</div>
-              <div className="text-xs text-gray-500 mt-1">In total funding</div>
-            </div>
-            <div className="bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl p-6">
-              <div className="text-4xl font-bold text-purple-600 mb-2">10K+</div>
-              <div className="text-gray-700 font-medium">Researchers</div>
-              <div className="text-xs text-gray-500 mt-1">Global community</div>
-            </div>
-            <div className="bg-gradient-to-br from-orange-50 to-orange-100 rounded-xl p-6">
-              <div className="text-4xl font-bold text-orange-600 mb-2">95%</div>
-              <div className="text-gray-700 font-medium">Success Rate</div>
-              <div className="text-xs text-gray-500 mt-1">Project completion</div>
-            </div>
           </div>
         </div>
       </section>
 
       {/* Contact Section */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16 lg:py-24 bg-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            {/* Contact Image */}
-            <div className="relative">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+            {/* Plant Image */}
+            <div className="relative lg:pr-8">
               <img
-                src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=800&h=600&fit=crop&auto=format"
-                alt="Scientists and researchers working together on breakthrough innovations"
-                className="w-full h-96 object-cover rounded-2xl shadow-lg"
+                src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600&h=800&fit=crop&auto=format"
+                alt="Green plant leaves in natural light"
+                className="w-full h-[500px] lg:h-[650px] object-cover rounded-2xl"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-green-600/30 to-transparent rounded-2xl"></div>
-              <div className="absolute bottom-6 left-6 text-white">
-                <h3 className="text-xl font-bold mb-2">Fund the Future of Science</h3>
-                <p className="text-sm opacity-90">Connect with researchers changing the world</p>
-              </div>
             </div>
 
             {/* Contact Form */}
-            <div>
-              <h2 className="text-4xl font-bold text-gray-900 mb-3">Contact Us</h2>
-              <p className="text-gray-600 mb-8">
-                Ready to fund groundbreaking research? Get in touch with our team and let&apos;s discuss
-                how we can support your scientific innovation.
-              </p>
+            <div className="lg:pl-8 lg:pt-8">
+              <div className="mb-8">
+                <h2 className="text-4xl lg:text-6xl font-bold text-gray-900 leading-tight" style={{ fontFamily: 'serif' }}>Contact Us</h2>
+              </div>
 
-              <form className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
-                    <input
-                      type="text"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
-                      placeholder="Enter your full name"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
-                    <input
-                      type="email"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
-                      placeholder="your.email@university.edu"
-                    />
-                  </div>
-                </div>
-
+              <form className="space-y-8 mb-12">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Research Field</label>
-                  <select className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all">
-                    <option value="">Select your research field</option>
-                    <option value="renewable-energy">Renewable Energy</option>
-                    <option value="biotechnology">Biotechnology</option>
-                    <option value="artificial-intelligence">Artificial Intelligence</option>
-                    <option value="climate-science">Climate Science</option>
-                    <option value="space-technology">Space Technology</option>
-                    <option value="medical-research">Medical Research</option>
-                    <option value="other">Other</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Message</label>
-                  <textarea
-                    rows={4}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
-                    placeholder="Tell us about your research project and funding needs..."
+                  <input
+                    type="text"
+                    className="w-full px-0 py-3 border-0 border-b border-gray-400 bg-transparent focus:ring-0 focus:border-gray-800 text-lg placeholder-gray-600 transition-colors outline-none"
+                    placeholder="Full Name"
                   />
                 </div>
 
-                <button className="w-full bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition-colors flex items-center justify-center">
-                  <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 001.79 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                  </svg>
-                  Send Message
-                </button>
+                <div>
+                  <input
+                    type="email"
+                    className="w-full px-0 py-3 border-0 border-b border-gray-400 bg-transparent focus:ring-0 focus:border-gray-800 text-lg placeholder-gray-600 transition-colors outline-none"
+                    placeholder="E-mail"
+                  />
+                </div>
+
+                <div>
+                  <textarea
+                    rows={3}
+                    className="w-full px-0 py-3 border-0 border-b border-gray-400 bg-transparent focus:ring-0 focus:border-gray-800 text-lg placeholder-gray-600 transition-colors resize-none outline-none"
+                    placeholder="Message"
+                  />
+                </div>
+
+                <div className="pt-4">
+                  <button className="bg-black text-white px-10 py-3 rounded-full font-medium text-base hover:bg-gray-800 transition-colors">
+                    Contact Us
+                  </button>
+                </div>
               </form>
 
-              <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="bg-white rounded-lg p-6 shadow-sm border">
-                  <div className="flex items-center mb-3">
-                    <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center mr-3">
-                      <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 001.79 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                      </svg>
-                    </div>
-                    <h3 className="font-semibold text-gray-900">Email</h3>
-                  </div>
-                  <p className="text-gray-600">support@fundmyscience.com</p>
-                  <p className="text-gray-600">partnerships@fundmyscience.com</p>
+              {/* Contact Info */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-8">
+                <div>
+                  <h3 className="font-bold text-gray-900 text-base mb-1">Contact</h3>
+                  <p className="text-gray-600 text-sm">hi@green.com</p>
                 </div>
-                <div className="bg-white rounded-lg p-6 shadow-sm border">
-                  <div className="flex items-center mb-3">
-                    <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mr-3">
-                      <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                      </svg>
-                    </div>
-                    <h3 className="font-semibold text-gray-900">Headquarters</h3>
-                  </div>
-                  <p className="text-gray-600">Palo Alto, California</p>
-                  <p className="text-gray-600">San Francisco Bay Area</p>
+                <div>
+                  <h3 className="font-bold text-gray-900 text-base mb-1">Based in</h3>
+                  <p className="text-gray-600 text-sm">Los Angeles,</p>
+                  <p className="text-gray-600 text-sm">California</p>
                 </div>
               </div>
 
               {/* Social Links */}
-              <div className="flex space-x-4 mt-6">
-                <a href="#" className="w-10 h-10 bg-gray-900 text-white rounded-full flex items-center justify-center">
+              <div className="flex space-x-4">
+                <a href="#" className="w-10 h-10 bg-black text-white rounded-full flex items-center justify-center hover:bg-gray-800 transition-colors">
                   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z" />
                   </svg>
                 </a>
-                <a href="#" className="w-10 h-10 bg-gray-900 text-white rounded-full flex items-center justify-center">
+                <a href="#" className="w-10 h-10 bg-black text-white rounded-full flex items-center justify-center hover:bg-gray-800 transition-colors">
                   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.174-.105-.949-.199-2.403.041-3.439.219-.937 1.219-5.175 1.219-5.175s-.311-.623-.311-1.544c0-1.446.839-2.525 1.883-2.525.888 0 1.317.667 1.317 1.466 0 .893-.568 2.229-.861 3.467-.245 1.04.522 1.887 1.549 1.887 1.859 0 3.285-1.96 3.285-4.792 0-2.503-1.799-4.253-4.37-4.253-2.977 0-4.727 2.234-4.727 4.546 0 .9.347 1.863.78 2.388.085.103.097.194.072.299-.079.33-.254 1.037-.289 1.183-.046.189-.151.229-.35.138-1.299-.604-2.111-2.5-2.111-4.028 0-3.298 2.394-6.325 6.901-6.325 3.628 0 6.445 2.584 6.445 6.032 0 3.598-2.27 6.492-5.42 6.492-1.058 0-2.055-.549-2.394-1.275 0 0-.524 1.994-.651 2.48-.236.92-.872 2.072-1.297 2.777.978.302 2.018.461 3.085.461 6.624 0 11.99-5.367 11.99-11.987C24.007 5.367 18.641.001 12.017.001z" />
+                    <path d="M12 0C5.374 0 0 5.373 0 12s5.374 12 12 12 12-5.373 12-12S18.626 0 12 0zm5.568 8.16c-.169 1.858-.896 3.462-2.136 4.702C14.172 14.122 12.568 14.849 10.71 15.018c-1.858.169-3.462-.558-4.702-1.798C4.748 11.96 4.021 10.356 3.852 8.498c-.169-1.858.558-3.462 1.798-4.702C6.89 2.536 8.494 1.809 10.352 1.64c1.858-.169 3.462.558 4.702 1.798 1.24 1.24 1.967 2.844 2.136 4.702z" />
+                  </svg>
+                </a>
+                <a href="#" className="w-10 h-10 bg-black text-white rounded-full flex items-center justify-center hover:bg-gray-800 transition-colors">
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
                   </svg>
                 </a>
               </div>
@@ -385,79 +305,101 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-gray-900 text-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl font-bold mb-4">
-            Lets <em className="italic">Collaborate!</em>
-          </h2>
-          <p className="text-xl text-gray-300 mb-8">
-            Ready to fund groundbreaking research? We are excited to hear from you! Drop
-            us a line and lets discuss how we can turn your ideas into the future of science.
-          </p>
-          <Link
-            href="/auth/signup"
-            className="inline-block bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-lg font-medium"
-          >
-            Contact Us Today
-          </Link>
+      <section className="py-20 bg-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-8">
+            <div className="lg:max-w-2xl">
+              <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4" style={{ fontFamily: 'serif' }}>
+                Let&apos;s <em className="italic">Collaborate!</em>
+              </h2>
+              <p className="text-gray-600 text-lg">
+                Ready to create something amazing? We&apos;re excited to hear from you. Drop
+                us a message and let&apos;s start a conversation
+              </p>
+            </div>
+            <div className="flex-shrink-0">
+              <Link
+                href="/auth/signup"
+                className="bg-black hover:bg-gray-800 text-white px-8 py-4 rounded-full font-medium text-lg transition-colors"
+              >
+                Contact Us Today
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12">
+      <footer className="bg-gray-50 py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
             {/* Logo & Description */}
-            <div className="md:col-span-2">
-              <Link href="/" className="text-2xl font-bold text-green-400 mb-4 block">
-                FundMyScience
-              </Link>
-              <p className="text-gray-400 mb-4 max-w-md">
-                © Creative Commons, Santa Etal, #1, Toronto,
-                Canada, M6J 3T6 - 555 012 3456
-                info@fundmyscience.com
-              </p>
+            <div className="md:col-span-1">
+              <div className="mb-6">
+                <div className="text-3xl font-bold text-gray-900 mb-4" style={{ fontFamily: 'serif' }}>
+                  Fund My Science
+                </div>
+                <div className="space-y-2 text-gray-600 text-sm">
+                  <p>123 Creative Avenue, Suite 456, Samarlinda,</p>
+                  <p>Indonesia</p>
+                  <p className="mt-4">hello@innovartestudio.com</p>
+                </div>
+              </div>
             </div>
 
             {/* Quick Links */}
             <div>
-              <h3 className="font-semibold mb-4">Quick Links</h3>
-              <ul className="space-y-2 text-gray-400">
-                <li><Link href="/" className="hover:text-white">Careers</Link></li>
-                <li><Link href="/" className="hover:text-white">Events</Link></li>
-                <li><Link href="/" className="hover:text-white">Resources</Link></li>
-                <li><Link href="/" className="hover:text-white">Directory</Link></li>
+              <h3 className="font-semibold text-gray-900 mb-6">Quick Links</h3>
+              <ul className="space-y-3 text-gray-600">
+                <li><Link href="/" className="hover:text-gray-900 transition-colors">Our Craft</Link></li>
+                <li><Link href="/" className="hover:text-gray-900 transition-colors">Showcase</Link></li>
+                <li><Link href="/" className="hover:text-gray-900 transition-colors">Team</Link></li>
+                <li><Link href="/" className="hover:text-gray-900 transition-colors">Insight</Link></li>
+                <li><Link href="/" className="hover:text-gray-900 transition-colors">Contact</Link></li>
               </ul>
             </div>
 
             {/* Follow Us */}
             <div>
-              <h3 className="font-semibold mb-4">Follow Us</h3>
-              <ul className="space-y-2 text-gray-400">
-                <li><Link href="/" className="hover:text-white">Linkedin</Link></li>
-                <li><Link href="/" className="hover:text-white">Facebook</Link></li>
-                <li><Link href="/" className="hover:text-white">Instagram</Link></li>
-                <li><Link href="/" className="hover:text-white">Twitter</Link></li>
+              <h3 className="font-semibold text-gray-900 mb-6">Follow Us</h3>
+              <ul className="space-y-3 text-gray-600">
+                <li><Link href="/" className="hover:text-gray-900 transition-colors">Linkedin</Link></li>
+                <li><Link href="/" className="hover:text-gray-900 transition-colors">Instagram</Link></li>
+                <li><Link href="/" className="hover:text-gray-900 transition-colors">X (Twitter)</Link></li>
+                <li><Link href="/" className="hover:text-gray-900 transition-colors">Facebook</Link></li>
               </ul>
             </div>
 
-            {/* Our Policies */}
+            {/* Newsletter */}
             <div>
-              <h3 className="font-semibold mb-4">Our Policies</h3>
-              <ul className="space-y-2 text-gray-400">
-                <li><Link href="/" className="hover:text-white">Subscribe to our newsletter. It is included, advanced, fun, and
-                  more than this this is some excellent additional content</Link></li>
-              </ul>
+              <h3 className="font-semibold text-gray-900 mb-2">Stay <em className="italic" style={{ fontFamily: 'serif' }}>Updated</em></h3>
+              <p className="text-gray-600 text-sm mb-6 leading-relaxed">
+                Subscribe to our newsletter for the latest updates, tips,
+                and trends in the world of digital creativity
+              </p>
+
+              <div className="flex">
+                <input
+                  type="email"
+                  placeholder="Enter your email address"
+                  className="flex-1 px-4 py-3 border border-gray-300 rounded-l-lg focus:ring-0 focus:border-gray-900 text-sm transition-colors outline-none"
+                />
+                <button className="bg-black hover:bg-gray-800 text-white px-4 py-3 rounded-r-lg transition-colors flex items-center justify-center">
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                  </svg>
+                </button>
+              </div>
             </div>
           </div>
 
-          <div className="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
-            <p className="text-gray-400 text-sm">
-              © 2024 FundMyScience Studio. All rights reserved.
+          <div className="border-t border-gray-200 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+            <p className="text-gray-600 text-sm">
+              © 2024 Fund My Science Studio. All rights reserved.
             </p>
-            <div className="flex space-x-6 mt-4 md:mt-0">
-              <Link href="/" className="text-gray-400 hover:text-white text-sm">Privacy Policy</Link>
-              <Link href="/" className="text-gray-400 hover:text-white text-sm">Terms of Service</Link>
+            <div className="flex space-x-8 mt-4 md:mt-0">
+              <Link href="/" className="text-gray-600 hover:text-gray-900 text-sm transition-colors">Privacy Policy</Link>
+              <Link href="/" className="text-gray-600 hover:text-gray-900 text-sm transition-colors">Terms of Service</Link>
             </div>
           </div>
         </div>

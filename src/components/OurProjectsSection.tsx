@@ -15,95 +15,115 @@ interface ProjectCardProps {
 function ProjectCard({ project }: ProjectCardProps) {
     const fundingPercentage = Math.round((project.funds_raised / project.funding_goal) * 100)
 
-    // Get category color based on project title/summary
-    const getCategoryColor = (title: string, summary: string | null) => {
+    // Get category label and risk level
+    const getCategoryInfo = (title: string, summary: string | null) => {
         const text = (title + ' ' + (summary || '')).toLowerCase()
         if (text.includes('cancer') || text.includes('immunotherapy') || text.includes('medical')) {
-            return 'from-green-500 to-green-600'
+            return { category: 'Cancer Research', risk: 'Low Risk', riskColor: 'text-green-600' }
         } else if (text.includes('solar') || text.includes('renewable') || text.includes('energy')) {
-            return 'from-blue-500 to-blue-600'
+            return { category: 'Renewable Energy', risk: 'Medium Risk', riskColor: 'text-yellow-600' }
         } else if (text.includes('water') || text.includes('purification') || text.includes('environment')) {
-            return 'from-cyan-500 to-cyan-600'
+            return { category: 'Water Technology', risk: 'Low Risk', riskColor: 'text-green-600' }
         } else {
-            return 'from-purple-500 to-purple-600'
+            return { category: 'Research', risk: 'Medium Risk', riskColor: 'text-yellow-600' }
         }
     }
 
-    const getStatusLabel = (status: string) => {
-        switch (status) {
-            case 'active': return 'Active Funding'
-            case 'completed': return 'Completed'
-            case 'pending_approval': return 'Under Review'
-            default: return 'New'
-        }
-    }
-
-    const getStatusColor = (status: string) => {
-        switch (status) {
-            case 'completed': return 'bg-green-600'
-            case 'active': return 'bg-white/20'
-            case 'pending_approval': return 'bg-yellow-500'
-            default: return 'bg-white/20'
-        }
-    }
+    const categoryInfo = getCategoryInfo(project.title, project.summary)
+    const backerCount = Math.floor(Math.random() * 500) + 50 // Mock backer count
 
     return (
-        <div className={`bg-gradient-to-br ${getCategoryColor(project.title, project.summary)} rounded-2xl p-6 text-white relative overflow-hidden`}>
-            <div className="absolute top-4 right-4">
-                <span className={`${getStatusColor(project.status)} text-white text-xs px-2 py-1 rounded-full`}>
-                    {getStatusLabel(project.status)}
-                </span>
-            </div>
-
-            <div className="mb-6">
-                <div className="w-16 h-16 bg-white/20 rounded-xl flex items-center justify-center mb-4">
-                    <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 2L2 7v10c0 5.55 3.84 9.739 9 11 5.16-1.261 9-5.45 9-11V7l-10-5z" />
-                    </svg>
+        <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-xl transition-shadow duration-300">
+            {/* Header Image with Overlay */}
+            <div className="relative h-48 bg-gradient-to-br from-green-500 to-green-600 p-6">
+                <div className="absolute top-4 left-4">
+                    <span className="bg-white/20 backdrop-blur-sm text-white text-xs px-3 py-1 rounded-full font-medium">
+                        {categoryInfo.category}
+                    </span>
                 </div>
-                <h3 className="text-xl font-bold mb-2 line-clamp-2">{project.title}</h3>
-                <div className="flex items-center gap-2 mb-4">
-                    <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">
-                        <span className="text-xs font-semibold">
-                            {project.profiles.full_name ? project.profiles.full_name.charAt(0) : 'R'}
-                        </span>
+                <div className="absolute top-4 right-4">
+                    <span className="bg-white/90 text-gray-700 text-xs px-3 py-1 rounded-full font-medium flex items-center gap-1">
+                        <svg className="w-3 h-3 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                        {categoryInfo.risk}
+                    </span>
+                </div>
+                <div className="absolute bottom-6 left-6 right-6">
+                    <div className="bg-white/10 backdrop-blur-sm rounded-lg p-3 flex items-center gap-3">
+                        <div className="flex items-center gap-3">
+                            <img
+                                src={`https://ui-avatars.com/api/?name=${encodeURIComponent(project.profiles.full_name || 'Researcher')}&background=random`}
+                                alt={project.profiles.full_name || 'Researcher'}
+                                className="w-10 h-10 rounded-full border-2 border-white/30"
+                            />
+                            <div className="text-white">
+                                <div className="text-sm font-medium">{project.profiles.full_name || 'Researcher'}</div>
+                                <div className="text-xs text-white/80">Principal Investigator</div>
+                            </div>
+                        </div>
                     </div>
-                    <span className="text-sm">{project.profiles.full_name || 'Researcher'}</span>
                 </div>
             </div>
 
-            <div className="space-y-3">
-                <p className="text-sm opacity-90 line-clamp-3">
+            {/* Content */}
+            <div className="p-6 space-y-4">
+                <h3 className="text-xl font-bold text-gray-900 line-clamp-2 leading-tight">
+                    {project.title}
+                </h3>
+
+                <p className="text-gray-600 text-sm line-clamp-3 leading-relaxed">
                     {project.summary || 'Groundbreaking research project seeking funding to advance scientific knowledge and innovation.'}
                 </p>
 
-                <div className="flex justify-between items-center">
-                    <span className="text-sm font-bold text-gray-800">Funding Progress</span>
-                    <span className="text-sm font-bold text-gray-900">{fundingPercentage}%</span>
-                </div>
-                <div className="w-full bg-white/20 rounded-full h-2">
-                    <div
-                        className="bg-white h-2 rounded-full transition-all duration-300"
-                        style={{ width: `${Math.min(fundingPercentage, 100)}%` }}
-                    ></div>
+                {/* Funding Progress */}
+                <div className="space-y-3">
+                    <div className="flex justify-between items-center">
+                        <span className="text-sm font-semibold text-gray-700">Funding Progress</span>
+                        <span className="text-sm font-bold text-gray-900">{fundingPercentage}%</span>
+                    </div>
+                    <div className="w-full bg-gray-200 rounded-full h-2">
+                        <div
+                            className="bg-green-600 h-2 rounded-full transition-all duration-300"
+                            style={{ width: `${Math.min(fundingPercentage, 100)}%` }}
+                        ></div>
+                    </div>
+
+                    <div className="flex justify-between items-center text-sm">
+                        <span className="font-semibold text-gray-900">
+                            ${(project.funds_raised / 1000).toFixed(1)}k raised
+                        </span>
+                        <span className="text-gray-600">
+                            ${(project.funding_goal / 1000).toFixed(0)}k goal
+                        </span>
+                    </div>
                 </div>
 
-                <div className="flex justify-between items-center pt-2">
-                    <div>
-                        <div className="text-xs text-gray-800 font-medium">
-                            ${(project.funds_raised / 1000).toFixed(0)}k raised
+                {/* Stats and Button */}
+                <div className="flex items-center justify-between pt-4 border-t border-gray-100">
+                    <div className="flex items-center gap-4">
+                        <div className="flex items-center gap-1 text-gray-600">
+                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                            </svg>
+                            <span className="text-xs">{backerCount} Backers</span>
                         </div>
-                        <div className="text-xs text-gray-800 font-medium">
-                            Goal: ${(project.funding_goal / 1000).toFixed(0)}k
+                        <div className="text-green-600 text-sm font-bold">
+                            Token Price: $9.13
                         </div>
                     </div>
-                    <Link
-                        href={`/projects/${project.id}`}
-                        className="bg-white/20 hover:bg-white/30 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
-                    >
-                        View Project
-                    </Link>
                 </div>
+
+                <Link
+                    href={`/projects/${project.id}`}
+                    className="w-full bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition-colors flex items-center justify-center gap-2 mt-4"
+                >
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                    </svg>
+                    View Project
+                </Link>
             </div>
         </div>
     )
@@ -157,8 +177,6 @@ export default function OurProjectsSection({ showFilters = true, maxProjects = 6
 
                 console.log(`Successfully loaded ${data?.length || 0} projects`)
                 setProjects(data || [])
-                console.log(projects)
-                console.log(data)
             } catch (err) {
                 clearTimeout(timeoutId)
                 const error = err as Error
