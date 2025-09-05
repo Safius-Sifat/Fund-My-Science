@@ -3,11 +3,20 @@
 import { ethers } from 'ethers'
 import { createContext, ReactNode, useCallback, useContext, useEffect, useState } from 'react'
 
-// Contract ABI - Using minimal required functions
+// New Factory Pattern ABIs
 const FUND_MY_SCIENCE_ABI = [
-    // Events
     {
         "inputs": [
+            {
+                "internalType": "address",
+                "name": "_usdcToken",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "_daoAddress",
+                "type": "address"
+            },
             {
                 "internalType": "address",
                 "name": "_platformWallet",
@@ -23,14 +32,20 @@ const FUND_MY_SCIENCE_ABI = [
             {
                 "indexed": true,
                 "internalType": "uint256",
-                "name": "projectId",
+                "name": "databaseProjectId",
                 "type": "uint256"
             },
             {
-                "indexed": false,
-                "internalType": "uint256",
-                "name": "milestoneIndex",
-                "type": "uint256"
+                "indexed": true,
+                "internalType": "address",
+                "name": "escrowAddress",
+                "type": "address"
+            },
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "tokenAddress",
+                "type": "address"
             },
             {
                 "indexed": false,
@@ -40,13 +55,113 @@ const FUND_MY_SCIENCE_ABI = [
             },
             {
                 "indexed": false,
+                "internalType": "string",
+                "name": "title",
+                "type": "string"
+            },
+            {
+                "indexed": false,
                 "internalType": "uint256",
-                "name": "amount",
+                "name": "fundingGoal",
                 "type": "uint256"
             }
         ],
-        "name": "FundsReleased",
+        "name": "ProjectCreated",
         "type": "event"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "databaseProjectId",
+                "type": "uint256"
+            },
+            {
+                "internalType": "address",
+                "name": "researcher",
+                "type": "address"
+            },
+            {
+                "internalType": "string",
+                "name": "title",
+                "type": "string"
+            },
+            {
+                "internalType": "string",
+                "name": "symbol",
+                "type": "string"
+            },
+            {
+                "internalType": "uint256",
+                "name": "fundingGoal",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256[]",
+                "name": "milestoneAmounts",
+                "type": "uint256[]"
+            },
+            {
+                "internalType": "string[]",
+                "name": "milestoneDescriptions",
+                "type": "string[]"
+            }
+        ],
+        "name": "createProject",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "escrowAddress",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "databaseProjectId",
+                "type": "uint256"
+            }
+        ],
+        "name": "getProjectEscrow",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "getProjectCount",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "getAllProjectIds",
+        "outputs": [
+            {
+                "internalType": "uint256[]",
+                "name": "",
+                "type": "uint256[]"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
     },
     {
         "anonymous": false,
